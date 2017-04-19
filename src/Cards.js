@@ -1,38 +1,38 @@
 // The deck of cards
 module.exports = {
-    card1: {
+    card01: {
         value: 'A',
         suit: 'D'
     },
-    card2: {
+    card02: {
         value: '2',
         suit: 'D'
     },
-    card3: {
+    card03: {
         value: '3',
         suit: 'D'
     },
-    card4: {
+    card04: {
         value: '4',
         suit: 'D'
     },
-    card5: {
+    card05: {
         value: '5',
         suit: 'D'
     },
-    card6: {
+    card06: {
         value: '6',
         suit: 'D'
     },
-    card7: {
+    card07: {
         value: '7',
         suit: 'D'
     },
-    card8: {
+    card08: {
         value: '8',
         suit: 'D'
     },
-    card9: {
+    card09: {
         value: '9',
         suit: 'D'
     },

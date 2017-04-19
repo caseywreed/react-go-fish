@@ -9,8 +9,10 @@ class App extends Component {
   constructor() {
     super();
 
-    // Load deck
+    this.startGame = this.startGame.bind(this);
     this.loadDeck = this.loadDeck.bind(this);
+    this.dealHands = this.dealHands.bind(this);
+
     this.state = {
       deck: {},
       playerHand: {},
@@ -19,13 +21,19 @@ class App extends Component {
   }
 
   startGame() {
-    this.loadDeck();
+    this.loadDeck()
+    this.dealHands()
   }
 
   loadDeck() {
+    console.log('deck loading')
     this.setState({
       deck: cardsDeck,
     })
+  }
+
+  dealHands() {
+    console.log('dealing hands')
   }
 
   render() {
