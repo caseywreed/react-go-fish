@@ -5,8 +5,6 @@ import Card from './Card'
 
 class Game extends React.Component {
 
-
-
     render() {
         return (
             <div className='game-wrapper'>
@@ -14,7 +12,7 @@ class Game extends React.Component {
                 <Hand />
                 <Deck />
                 <Hand />
-                <Card value='K' suit='D'/>
+                <button onClick={this.props.startGame}>Start Game</button>
             </div>
         )
     }
