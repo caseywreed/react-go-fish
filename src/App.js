@@ -12,6 +12,7 @@ class App extends Component {
     this.startGame = this.startGame.bind(this);
     this.loadDeck = this.loadDeck.bind(this);
     this.dealHands = this.dealHands.bind(this);
+    this.dealCard = this.dealCard.bind(this);
 
     this.state = {
       deck: {},
@@ -34,6 +35,10 @@ class App extends Component {
 
   dealHands() {
     console.log('dealing hands')
+  }
+
+  dealCard() {
+    console.log('dealing card')
   }
 
   render() {
