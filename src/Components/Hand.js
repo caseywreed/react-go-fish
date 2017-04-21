@@ -1,4 +1,5 @@
 import React from 'react'
+// Is this going to be a "dumb" component?
 
 class Hand extends React.Component {
 

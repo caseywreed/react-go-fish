@@ -3,47 +3,47 @@ module.exports = {
     card1: {
         value: 'A',
         suit: 'D',
-        id: 1:
+        id: 1
     },
     card2: {
         value: '2',
         suit: 'D',
-        id: 2:
+        id: 2
     },
     card3: {
         value: '3',
         suit: 'D',
-        id: 3:
+        id: 3
     },
     card4: {
         value: '4',
         suit: 'D',
-        id: 4:
+        id: 4
     },
     card5: {
         value: '5',
         suit: 'D',
-        id: 5:
+        id: 5
     },
     card6: {
         value: '6',
         suit: 'D',
-        id: 6:
+        id: 6
     },
     card7: {
         value: '7',
         suit: 'D',
-        id: 7:
+        id: 7
     },
     card8: {
         value: '8',
         suit: 'D',
-        id: 8:
+        id: 8
     },
     card9: {
         value: '9',
         suit: 'D',
-        id: 9:
+        id: 9
     },
     card10: {
         value: '10',

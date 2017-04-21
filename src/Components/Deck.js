@@ -6,7 +6,7 @@ class Deck extends React.Component {
     return (
         <div>
             <h1>DECK COMPONENT</h1>
-            <h1>[]</h1>
+            <h1>[ ]</h1>
         </div>
     )
   }

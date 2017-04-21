@@ -1,7 +1,6 @@
 import React from 'react'
 import Hand from './Hand'
 import Deck from './Deck'
-import Card from './Card'
 
 class Game extends React.Component {
 
