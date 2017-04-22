@@ -5,23 +5,22 @@ import cardsDeck from '../Cards'
 
 import { removeByKey, getRandomKey } from '../helpers.js'
 
-
-
 class Game extends React.Component {
 
   constructor() {
     super();
 
-    this.startGame = this.startGame.bind(this);
-    this.loadDeck = this.loadDeck.bind(this);
-    this.dealHands = this.dealHands.bind(this);
-    this.dealCard = this.dealCard.bind(this);
+    this.startGame = this.startGame.bind(this)
+    this.loadDeck = this.loadDeck.bind(this)
+    this.dealHands = this.dealHands.bind(this)
+    this.dealCard = this.dealCard.bind(this)
 
     this.state = {
       deck: {},
       playerHand: {},
       computerHand: {},
     }
+
   }
 
   // Kind of like an init function
@@ -51,6 +50,7 @@ class Game extends React.Component {
     let keys = Object.keys(deck)
     let playerHand = {}
     let computerHand = {}
+    // Deal PLAYER hand
     for (let i = 0; i < 7; i++) {
       // Get a random card's key
       let randomCardKey = getRandomKey(keys)
@@ -63,7 +63,7 @@ class Game extends React.Component {
       // Remove the object with the key from the deck variable to set state later
       deck = removeByKey(deck, randomCardKey)
     }
-    // Do the exact same thing for the computer opponent
+    // Deal COMPUTER hand
     for (let i = 0; i < 7; i++) {
       let randomCardKey = getRandomKey(keys)
       let keyIndex = keys.indexOf(randomCardKey)
@@ -98,9 +98,9 @@ class Game extends React.Component {
         return (
             <div className='game-wrapper'>
                 <h1>GAME COMPONENT</h1>
-                <Hand hand={this.state.computerHand}/>
+                <Hand hand={this.state.computerHand} mode='computer'/>
                 <Deck />
-                <Hand hand={this.state.playerHand}/>
+                <Hand hand={this.state.playerHand} mode='player'/>
                 <button onClick={this.startGame}>Start Game</button>
             </div>
         )
