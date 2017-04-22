@@ -77,31 +77,26 @@ class Game extends React.Component {
   dealCard(player) {
     // Take copies of the current state for the deck
     // and the selected player
-    let hand = {...player}
+    let hand = {...this.state[player]}
     let deck = { ...this.state.deck }
-    console.log({hand})
     const keys = Object.keys(deck)
     // Select a random key
-    const randomCardKey = keys[Math.floor(Math.random() * keys.length)]
+    const randomCardKey = getRandomKey(keys)
     const newDeck = removeByKey(deck, randomCardKey)
     const newCard = deck[randomCardKey]
     hand[randomCardKey] = newCard
-    console.log(newDeck)
-    if (player === 'playerHand') {
-      this.setState( {deck: newDeck, playerHand: hand} )
-    } else {
-      this.setState( {deck: newDeck, computerHand: hand} )
-    }
+    this.setState({ deck, [player]: hand })
   }
 
     render() {
         return (
             <div className='game-wrapper'>
-                <h1>GAME COMPONENT</h1>
                 <Hand hand={this.state.computerHand} mode='computer'/>
                 <Deck />
                 <Hand hand={this.state.playerHand} mode='player'/>
                 <button onClick={this.startGame}>Start Game</button>
+                <button onClick={() => this.dealCard('playerHand')}>Deal Card to Player</button>
+                <button onClick={() => this.dealCard('computerHand')}>Deal Card to Computer</button>
             </div>
         )
     }

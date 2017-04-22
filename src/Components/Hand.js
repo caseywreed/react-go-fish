@@ -1,22 +1,30 @@
 import React from 'react'
 import Card from './Card'
-// Is this going to be a "dumb" component?
+import cardback from '../img/cardback.png'
 
 class Hand extends React.Component {
 
-    // Should we put our logic here for deciding whether the hand is 
-    // the player's or the computer's?
-
     render() {
+        const isPlayerHand = this.props.mode
         return (
-            <div className='hand-wrapper'>
-                <ul className="list-of-fishes">
-                {
-                Object
-                    .keys(this.props.hand)
-                    .map(key => <Card key={key} suit={this.props.hand[key].suit} value={this.props.hand[key].value} />)
-                }
-                </ul>
+            <div>
+                {isPlayerHand === 'player' ? (
+                    <ul className="list-of-cards" >
+                        {
+                            Object
+                                .keys(this.props.hand)
+                                .map(key => <Card key={key} suit={this.props.hand[key].suit} value={this.props.hand[key].value} />)
+                        }
+                    </ul >
+                ) : (
+                    <ul className="list-of-cards" >
+                        {
+                            Object
+                                .keys(this.props.hand)
+                                .map(key => <img key={key} src={cardback} className="cardback" />)
+                        }
+                    </ul >
+                    )}
             </div>
         )
     }
