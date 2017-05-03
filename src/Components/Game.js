@@ -1,6 +1,7 @@
 import React from 'react'
 import Hand from './Hand'
 import Deck from './Deck'
+import TurnDisplay from './TurnDisplay'
 import cardsDeck from '../Cards'
 
 import { removeByKey, getRandomKey } from '../helpers.js'
@@ -13,12 +14,14 @@ class Game extends React.Component {
     this.startGame = this.startGame.bind(this)
     this.loadDeck = this.loadDeck.bind(this)
     this.dealHands = this.dealHands.bind(this)
-    this.dealCard = this.dealCard.bind(this)
+    this.dealCardToPlayer = this.dealCardToPlayer.bind(this)
+    this.dealCardToComputer = this.dealCardToComputer.bind(this)
 
     this.state = {
       deck: {},
       playerHand: {},
       computerHand: {},
+      playerTurn: true
     }
 
   }
@@ -37,14 +40,12 @@ class Game extends React.Component {
   }
 
   loadDeck() {
-    console.log('deck loading')
     this.setState({
       deck: cardsDeck,
     })
   }
 
   dealHands() {
-    console.log('dealing hands')
     // Get a copy of the current state
     let deck = { ...this.state.deck }
     let keys = Object.keys(deck)
@@ -74,18 +75,24 @@ class Game extends React.Component {
     this.setState({ deck, playerHand, computerHand })
   }
 
-  dealCard(player) {
-    // Take copies of the current state for the deck
-    // and the selected player
-    let hand = {...this.state[player]}
+  dealCardToPlayer() {
+    let playerHand = {...this.state.playerHand }
     let deck = { ...this.state.deck }
     const keys = Object.keys(deck)
-    // Select a random key
     const randomCardKey = getRandomKey(keys)
-    const newDeck = removeByKey(deck, randomCardKey)
-    const newCard = deck[randomCardKey]
-    hand[randomCardKey] = newCard
-    this.setState({ deck, [player]: hand })
+    playerHand[randomCardKey] = deck[randomCardKey]
+    deck = removeByKey(deck, randomCardKey)
+    this.setState({ deck, playerHand })
+  }
+
+  dealCardToComputer() {
+    let computerHand = {...this.state.computerHand }
+    let deck = { ...this.state.deck }
+    const keys = Object.keys(deck)
+    const randomCardKey = getRandomKey(keys)
+    computerHand[randomCardKey] = deck[randomCardKey]
+    deck = removeByKey(deck, randomCardKey)
+    this.setState({ deck, computerHand })
   }
 
     render() {
@@ -95,8 +102,9 @@ class Game extends React.Component {
                 <Deck />
                 <Hand hand={this.state.playerHand} mode='player'/>
                 <button onClick={this.startGame}>Start Game</button>
-                <button onClick={() => this.dealCard('playerHand')}>Deal Card to Player</button>
-                <button onClick={() => this.dealCard('computerHand')}>Deal Card to Computer</button>
+                <button onClick={this.dealCardToPlayer}>Deal Card to Player</button>
+                <button onClick={this.dealCardToComputer}>Deal Card to Computer</button>
+                <TurnDisplay playerTurn={this.state.playerTurn} />
             </div>
         )
     }
