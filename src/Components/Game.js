@@ -64,7 +64,7 @@ class Game extends React.Component {
       // Remove the object with the key from the deck variable to set state later
       deck = removeByKey(deck, randomCardKey)
     }
-    // Deal COMPUTER hand
+    // Deal COMPUTER hand. Do the same thing as above
     for (let i = 0; i < 7; i++) {
       let randomCardKey = getRandomKey(keys)
       let keyIndex = keys.indexOf(randomCardKey)
@@ -76,38 +76,48 @@ class Game extends React.Component {
   }
 
   dealCardToPlayer() {
-    let playerHand = {...this.state.playerHand }
-    let deck = { ...this.state.deck }
-    const keys = Object.keys(deck)
-    const randomCardKey = getRandomKey(keys)
-    playerHand[randomCardKey] = deck[randomCardKey]
-    deck = removeByKey(deck, randomCardKey)
-    this.setState({ deck, playerHand })
+    this.setState((prevState) => {
+      const { playerHand, deck } = prevState;
+      const keys = Object.keys(deck);
+      const randomCardKey = getRandomKey(keys);
+      const randomCard = deck[randomCardKey]
+      const deckWithCardRemoved = removeByKey(deck, randomCardKey);
+      const updatedPlayerHand = Object.assign({}, playerHand, { [randomCardKey]: randomCard });
+      return {
+        deck: deckWithCardRemoved,
+        playerHand: updatedPlayerHand
+      };
+    });
   }
 
   dealCardToComputer() {
-    let computerHand = {...this.state.computerHand }
-    let deck = { ...this.state.deck }
-    const keys = Object.keys(deck)
-    const randomCardKey = getRandomKey(keys)
-    computerHand[randomCardKey] = deck[randomCardKey]
-    deck = removeByKey(deck, randomCardKey)
-    this.setState({ deck, computerHand })
+    this.setState((prevState) => {
+      const { computerHand, deck } = prevState;
+      const keys = Object.keys(deck);
+      const randomCardKey = getRandomKey(keys);
+      const randomCard = deck[randomCardKey]
+      const deckWithCardRemoved = removeByKey(deck, randomCardKey);
+      const updatedComputerHand = Object.assign({}, computerHand, { [randomCardKey]: randomCard });
+      return {
+        deck: deckWithCardRemoved,
+        computerHand: updatedComputerHand
+      };
+    });
   }
 
-    render() {
-        return (
-            <div className='game-wrapper'>
-                <Hand hand={this.state.computerHand} mode='computer'/>
-                <Deck />
-                <Hand hand={this.state.playerHand} mode='player'/>
-                <button onClick={this.startGame}>Start Game</button>
-                <button onClick={this.dealCardToPlayer}>Deal Card to Player</button>
-                <button onClick={this.dealCardToComputer}>Deal Card to Computer</button>
-                <TurnDisplay playerTurn={this.state.playerTurn} />
-            </div>
-        )
-    }
+  render() {
+    return (
+      <div className='game-wrapper'>
+        <Hand hand={this.state.computerHand} mode='computer' />
+        <Deck />
+        <Hand hand={this.state.playerHand} mode='player' />
+        <button onClick={this.startGame}>Start Game</button>
+        <button onClick={this.dealCardToPlayer}>Deal Card to Player</button>
+        <button onClick={this.dealCardToComputer}>Deal Card to Computer</button>
+        <TurnDisplay playerTurn={this.state.playerTurn} />
+      </div>
+    )
+  }
 
 }
 

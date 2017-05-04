@@ -5,11 +5,10 @@ import cardback from '../img/cardback.png'
 class Hand extends React.Component {
 
     render() {
-        const isPlayerHand = this.props.mode
-        console.log(this.props)
+        const handMode = this.props.mode
         return (
             <div className="hand">
-                {isPlayerHand === 'player' ? (
+                {handMode === 'player' ? (
                     <ul className="list-of-cards" >
                         {
                             Object
